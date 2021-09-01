@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatchPassword } from '../validators/match-password';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -23,7 +24,7 @@ export class SignUpComponent implements OnInit {
       Validators.minLength(6),
       Validators.maxLength(20),
     ]),
-  });
+  }, {validators:[MatchPassword]});
 
   constructor() {}
 
