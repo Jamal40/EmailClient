@@ -7,26 +7,29 @@ import { MatchPassword } from '../validators/match-password';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-  authForm = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(20),
-      Validators.pattern(/^[a-z0-9]+$/),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(20),
-    ]),
-    passwordConfirmation: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(20),
-    ]),
-  }, {validators:[MatchPassword]});
+  authForm = new FormGroup(
+    {
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+        Validators.pattern(/^[a-z0-9]+$/),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+      ]),
+      passwordConfirmation: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+      ]),
+    },
+    { validators: [this.matchPassword.validate] }
+  );
 
-  constructor() {}
+  constructor(private matchPassword: MatchPassword) {}
 
   ngOnInit(): void {}
 }
