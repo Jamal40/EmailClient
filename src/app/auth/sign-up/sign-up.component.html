@@ -1,5 +1,5 @@
 <h2>Create an account</h2>
-<form class="ui form" [formGroup]="authForm">
+<form (ngSubmit)="onSubmit()" class="ui form" [formGroup]="authForm">
   <app-input
     label="Username"
     [control]="$any(authForm).get('username')"
