@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 interface SignupCredentials {
   username: string;
@@ -14,6 +16,8 @@ interface SignupResponse {
 })
 export class AuthService {
   baseUrl = 'https://api.angular-email.com/auth/';
+  signedIn$ = new BehaviorSubject(false);
+
   constructor(private http: HttpClient) {}
 
   usernameAvailable(username: string) {
@@ -22,6 +26,12 @@ export class AuthService {
     });
   }
   signUp(credentials: SignupCredentials) {
-    return this.http.post<SignupResponse>(`${this.baseUrl}signup`, credentials);
+    return this.http
+      .post<SignupResponse>(`${this.baseUrl}signup`, credentials)
+      .pipe(
+        tap(() => {
+          this.signedIn$.next(true);
+        })
+      );
   }
 }
