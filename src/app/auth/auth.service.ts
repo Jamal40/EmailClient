@@ -29,6 +29,7 @@ export class AuthService {
       username,
     });
   }
+
   signUp(credentials: SignupCredentials) {
     return this.http
       .post<SignupResponse>(`${this.baseUrl}signup`, credentials)
@@ -38,10 +39,19 @@ export class AuthService {
         })
       );
   }
+
   checkAuth() {
     return this.http.get<SignedInResponse>(`${this.baseUrl}signedin`).pipe(
       tap(({ authenticated }) => {
         this.signedIn$.next(authenticated);
+      })
+    );
+  }
+
+  signOut() {
+    return this.http.post(`${this.baseUrl}signOut`, {}).pipe(
+      tap(() => {
+        this.signedIn$.next(false);
       })
     );
   }
