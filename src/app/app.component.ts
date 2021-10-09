@@ -8,7 +8,7 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  signedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  signedIn$ = new BehaviorSubject<boolean | null>(true);
   constructor(private authService: AuthService) {
     this.signedIn$ = this.authService.signedIn$;
   }
