@@ -24,8 +24,8 @@ export class AuthGuard implements CanLoad {
       // skipWhile((value: boolean | null) => {
       //   return value === null;
       // }),
-      filter((v) => v !== null),
-      take(1)
+      filter((v) => v !== null)
+      // take(1)
     );
     let y = x as Observable<boolean>;
 
